@@ -2,31 +2,44 @@
 package application;
 
 import entities.ContaCorrente;
+import entities.ContaEspecial;
+import entities.ContaPoupanca;
 import entities.Titular;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Program {
 
     public static void main(String[] args) {
         
-        Scanner sc = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
-        Titular titular = new Titular("Vini", "vini@google.com", "rua de narnia");
+        System.out.println("Seja Bem Vindo Ao Banco CPT");
+        System.out.println("");
+        System.out.print("Nome do Titular: ");
+        String nome = input.nextLine();
+        System.out.print("Digite seu Email: ");
+        String email = input.nextLine();
+        System.out.print("Digite seu Endereço: ");
+        String endereco = input.nextLine();
         
-        ContaCorrente contaCorrente = new ContaCorrente(1, 123, 1500.00, titular);
-        //Codigo abaixo apenas para teste dos metodos da class ContaCorrent com limites adicionados
-        System.out.println(contaCorrente.getSaldo());
-        System.out.println("saque");
-        double valor = sc.nextDouble();
-        contaCorrente.sacar(valor);
-        System.out.println(contaCorrente.getSaldo());
-        System.out.println("deposito");
-        valor = sc.nextDouble();
-        contaCorrente.depositar(valor);
-        System.out.println(contaCorrente.getSaldo());
+        Titular titular = new Titular(nome, email, endereco);
+        ContaPoupanca contaPoupanca = new ContaPoupanca(titular);
+        
+        System.out.print("Deseja fazer um Deposito (y/n)? ");
+        char op = input.next().charAt(0);
+        if(op == 'y'){
+            System.out.print("Valor a ser depositado: ");
+            double valor = input.nextDouble();
+            contaPoupanca.depositar(valor);
+            System.out.println(contaPoupanca);
+        }else{
+            System.out.println(contaPoupanca);
+        }
         
         
-        sc.close();
+        input.close();
     }
     
 }

@@ -1,12 +1,12 @@
 package entities;
 
-public class ContaPoupanca extends Conta {
+public class ContaPoupanca extends Conta implements Rendimentos{
 
-    public ContaPoupanca(Integer numero, Integer agencia, Double saldo, Titular titular) {
-        super(numero, agencia, saldo, titular);
+    public ContaPoupanca(Titular titular) {
+        super(titular);
     }
 
-    public Double getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
@@ -29,4 +29,24 @@ public class ContaPoupanca extends Conta {
         return false;
     }
 
+    /*
+    Metodo abstrato da interface Rendimentos
+    */
+    @Override
+    public void atualizar(double taxaRendimento) {
+        saldo += (taxaRendimento /100);
+    }
+
+    @Override
+    public String toString() {
+        return "Dados da Conta: \n"
+                +"Numero: "
+                + getNumero()
+                +"\nAgencia: "
+                +getAgencia()
+                +"\nSaldo: "
+                +getSaldo();
+    }
+    
+    
 }

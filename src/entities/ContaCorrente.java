@@ -1,18 +1,17 @@
-
 package entities;
 
-public class ContaCorrente extends Conta{
+public class ContaCorrente extends Conta {
 
-    private Double limite = 1000.00; //limite proposto no exercicio
-    private Double taxa = 0.50; //taxa proposto no exercicio
-    
-    public ContaCorrente(Integer numero, Integer agencia, Double saldo, Titular titular) {
-        super(numero, agencia, saldo, titular);
+    private Double limite = 1000.00;
+    private Double taxa = 0.50;
+
+    public ContaCorrente(Titular titular) {
+        super(titular);
     }
 
-    public Double getSaldo() {
+    public double getSaldo() {
         return saldo;
-    }  
+    }
 
     public Double getLimite() {
         return limite;
@@ -30,28 +29,31 @@ public class ContaCorrente extends Conta{
         this.taxa = taxa;
     }
 
+    public double getSaldoComLimite() {
+        return saldo + limite;
+    }
+
     /*
     metodo sobreposto do tipo boolean para verificar se pode sacar ou não
     (Bom que já tem a verificação, exemplo: saque so acontece se o valor for igual ou menor).
-    */
+     */
     @Override
     public boolean sacar(double valor) {
-        if(saldo >= valor && valor <=limite){
-            saldo-=valor;
+        if (valor <= limite && valor <= saldo && valor > 0) {
+            saldo -= (valor + taxa);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     @Override
     public boolean depositar(double valor) {
-        if(valor > 0 && valor <= limite){
-            saldo+=valor;
+        if (valor > 0 && valor <= limite) {
+            saldo += (valor + taxa);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
 }

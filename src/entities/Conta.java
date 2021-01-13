@@ -1,20 +1,20 @@
 
 package entities;
 
+import java.util.Random;
+
 public abstract class Conta{
-    private Integer numero;
-    private Integer agencia;
-    protected Double saldo;
+    Random random = new Random();
+    private Integer numero = random.nextInt(9999);
+    private Integer agencia = 077;
+    protected double saldo;
     
     private Titular titular;
     /*
     Constructor com parametros numeor da conta, agencia, saldo(Apenas para teste),
     Titular, que recebe por parametro(Nome, Email, Enderenço).
     */
-    public Conta(Integer numero, Integer agencia, Double saldo, Titular titular) {
-        this.numero = numero;
-        this.agencia = agencia;
-        this.saldo = saldo;
+    public Conta(Titular titular) {
         this.titular = titular;
     }
 
@@ -26,7 +26,7 @@ public abstract class Conta{
         return agencia;
     }
 
-    public Double getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
