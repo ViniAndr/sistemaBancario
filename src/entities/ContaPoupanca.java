@@ -10,10 +10,6 @@ public class ContaPoupanca extends Conta {
         return saldo;
     }
 
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
-    }
-
     @Override
     public boolean sacar(double valor) {
         if (saldo > valor) {
